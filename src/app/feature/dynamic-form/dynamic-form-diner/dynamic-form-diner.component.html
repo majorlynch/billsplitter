@@ -1,0 +1,22 @@
+
+  <div class="row ml-5 mr-5">
+    <div class="col-sm">
+      <span class="p-2">
+        <ng-content/>
+      </span>
+      <input [id]="diner.key" name="diner.key" type="text" [(ngModel)]="diner.name" />
+    </div>
+    <div class="input-group col-sm">
+      <button class="btn btn-outline-danger" type="button" (click)="decrementValue()">-</button>
+      <input [id]="diner.key" type="text" [disabled]="diner.locked" [(ngModel)]="diner.amount"
+        (ngModelChange)="onValueChange($event)" />
+      <button class="btn btn-outline-success" type="button" (click)="incrementValue()">+</button>
+    </div>
+    <div class="col-sm">
+    <div class="form-check form-switch">
+        <input [id]="diner.key" class="form-check-input" type="checkbox" [(ngModel)]="diner.locked"
+          (ngModelChange)="onValueChange($event)" />
+    </div>
+    </div>
+  </div>
+  <!--@if (!isValid) {<div class="errorMessage"> {{ question.label }} is required</div>}-->

@@ -1,5 +1,5 @@
 {
-  "name": "clbill-splitter",
+  "name": "billsplitter",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -18,6 +18,12 @@
     "@angular/platform-browser": "^17.3.0",
     "@angular/platform-browser-dynamic": "^17.3.0",
     "@angular/router": "^17.3.0",
+    "angular-google-charts": "^16.0.2",
+    "bootstrap": "^5.3.3",
+    "bootstrap-icons": "^1.11.3",
+    "chart.js": "^4.4.7",
+    "jquery": "^3.7.1",
+    "popper.js": "^1.16.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"

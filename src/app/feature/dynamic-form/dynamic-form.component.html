@@ -1,0 +1,53 @@
+<div class="container-fluid">
+    <form (ngSubmit)="onSubmit()">
+        <div class="row ml-5 mr-5">
+            <div class="col-sm">
+                Name
+            </div>
+            <div class="col-sm">
+                Amount
+            </div>
+            <div class="col-sm">
+                Locked
+            </div>
+        </div>
+        @for (diner of diners; track diner) {
+        <app-diner [diner]="diner" (amountChanged)="onAmountChanged()">
+            <button class="btn btn-outline-danger" type="button" (click)="onRemoveDiner(diner.name)"><i
+                    class="bi bi-trash"></i></button>
+        </app-diner>
+        }
+
+        <div class="row ml-5 mr-5">
+            <div class="col-sm">
+                <button class="btn btn-outline-success" type="button" (click)="onInsertDiner()" ><i class="bi bi-person-plus-fill"></i></button>
+            </div>
+            <div class="col-sm">
+            </div>
+            <div class="col-sm">
+                <div class="form-group">
+                    <label for="totalAmount">Total Amount</label>
+                    <input class="form-control" id="totalAmount" name="totalAmount" type="text"
+                        [(ngModel)]="totalAmount">
+                    <small id="emailHelp" class="form-text text-muted">The overall cost.</small>
+                </div>
+                <!--<button class="btn btn-outline-primary" type="submit">Refresh</button>-->
+            </div>
+        </div>
+        <div class="row ">
+            <div class="col-sm">
+                <button name="refreshPie" type="button" class="btn btn-outline-primary mt-2"
+                    (click)="onGenerateRandomNames()">Generate Random Names</button>
+            </div>
+            <div class="col-sm">
+                <button class="btn btn-outline-primary" type="button" (click)="onDivideAmount()">Divide Amount</button>
+            </div>
+        </div>
+    </form>
+
+    @if (payLoad) {
+    <div class="form-row">
+        <strong>saved the following values</strong><br> {{ payLoad }}
+    </div>
+    }
+</div>

@@ -1,0 +1,13 @@
+<div class="container-fluid">
+  <div class="row ml-5 mr-5">
+    <div class="col-sm">
+      <input [id]="diner.key" type="text" [(ngModel)]="diner.name"/>
+    </div>
+    <div class="input-group col-sm">
+      <button class="btn btn-outline-danger" type="button" (click)="decrementValue()">-</button>
+      <input [id]="diner.key" type="text" [(ngModel)]="diner.amount" aria-describedby="button-addon" (ngModelChange)="onValueChange($event)"/>
+      <button class="btn btn-outline-success" type="button" (click)="incrementValue()">+</button>
+    </div>
+  </div>
+  <!--@if (!isValid) {<div class="errorMessage"> {{ question.label }} is required</div>}-->
+</div>
