@@ -7,7 +7,7 @@ import {
   OnChanges,
   SimpleChanges,
 } from '@angular/core';
-import { DinerBase } from '../../../model/dinerBase';
+import { DinerBase } from '../../../shared/model/dinerBase';
 import { CommonModule } from '@angular/common';
 import { DecimalPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';

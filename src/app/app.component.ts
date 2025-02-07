@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { HeaderComponent } from './feature/header/header.component';
 import { DynamicFormComponent } from './feature/dynamic-form/dynamic-form.component';
 import { PieChartComponent } from './feature/piechart/piechart.component';
-import { DinerBase } from './model/dinerBase';
+import { DinerBase } from './shared/model/dinerBase';
 
 import { Observable } from 'rxjs';
 import { DinersService } from './service/diners.service';
@@ -33,6 +33,7 @@ export class AppComponent {
 
   onUpdateChart() {
     this.pieChartComponentChild?.updateChart(this.diners);
+    this.totalAmount = this.dinersService.getTotal(this.diners);
   }
 
   onDivideAmount(divideAmountParam: number) {
@@ -56,12 +57,12 @@ export class AppComponent {
     const currentTotalAmount = this.dinersService.getTotal(this.diners);
     this.dinersService.divideAmount(this.diners, currentTotalAmount);
     this.pieChartComponentChild.updateChart(this.diners);
+    this.totalAmount = this.dinersService.getTotal(this.diners);
   }
 
   onRemoveDiner(name: string) {
     const currentTotalAmount = this.dinersService.getTotal(this.diners);
     this.diners = this.diners?.filter((d) => d.name !== name);
-    console.log(currentTotalAmount);
     this.dinersService.divideAmount(this.diners, currentTotalAmount);
     this.pieChartComponentChild.updateChart(this.diners);
   }

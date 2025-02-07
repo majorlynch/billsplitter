@@ -7,10 +7,10 @@
       <input [id]="diner.key" name="diner.key" type="text" [(ngModel)]="diner.name" />
     </div>
     <div class="input-group col-sm">
-      <button class="btn btn-outline-danger" type="button" (click)="decrementValue()">-</button>
+      <button class="btn btn-outline-danger" type="button" [disabled]="diner.locked" (click)="decrementValue()">-</button>
       <input [id]="diner.key" type="text" [disabled]="diner.locked" [(ngModel)]="diner.amount"
         (ngModelChange)="onValueChange($event)" />
-      <button class="btn btn-outline-success" type="button" (click)="incrementValue()">+</button>
+      <button class="btn btn-outline-success" type="button" [disabled]="diner.locked" (click)="incrementValue()">+</button>
     </div>
     <div class="col-sm">
     <div class="form-check form-switch">

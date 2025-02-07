@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { DinerBase } from '../model/dinerBase';
+import { DinerBase } from '../shared/model/dinerBase';
 import { of } from 'rxjs';
 
 @Injectable({

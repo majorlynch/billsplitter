@@ -7,10 +7,11 @@ import {
   OnChanges,
   SimpleChanges,
 } from '@angular/core';
-import { DinerBase } from '../../../model/dinerBase';
+
 import { CommonModule } from '@angular/common';
 import { DecimalPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { DinerBase } from '../../../shared/model/dinerBase';
 
 @Component({
   selector: 'app-diner',
@@ -42,7 +43,9 @@ export class DynamicFormDinerComponent implements OnChanges {
   }
 
   incrementValue() {
-    this.diner.amount += 1;
+    console.log(this.diner.amount);
+    this.diner.amount = +this.diner.amount + 1;
+    console.log(this.diner.amount);
     this.amountChanged.emit();
   }
 
@@ -53,5 +56,10 @@ export class DynamicFormDinerComponent implements OnChanges {
 
   onValueChange(newVal: string) {
     this.amountChanged.emit();
+  }
+
+  formatAmount(amount: number): string {
+    // Format the amount to two decimal places
+    return amount.toFixed(2);
   }
 }
