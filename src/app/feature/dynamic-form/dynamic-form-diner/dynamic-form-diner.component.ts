@@ -43,9 +43,7 @@ export class DynamicFormDinerComponent implements OnChanges {
   }
 
   incrementValue() {
-    console.log(this.diner.amount);
     this.diner.amount = +this.diner.amount + 1;
-    console.log(this.diner.amount);
     this.amountChanged.emit();
   }
 

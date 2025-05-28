@@ -1,13 +1,13 @@
-<div class="container-fluid">
+<div class="container pl-5">
     <form (ngSubmit)="onSubmit()">
-        <div class="row ml-5 mr-5">
-            <div class="col-sm">
+        <div class="row pl-5 pr-5">
+            <div class="col-sm" style="text-align:left">
                 Name
             </div>
-            <div class="col-sm">
+            <div class="col-sm" style="text-align:left">
                 Amount
             </div>
-            <div class="col-sm">
+            <div class="col-sm" style="text-align:left">
                 Locked
             </div>
         </div>
@@ -19,17 +19,17 @@
         }
 
         <div class="row ml-5 mr-5">
-            <div class="col-sm">
+            <div class="col-sm"  style="text-align:left">
                 <button class="btn btn-outline-success" type="button" (click)="onInsertDiner()" ><i class="bi bi-person-plus-fill"></i></button>
             </div>
             <div class="col-sm">
             </div>
             <div class="col-sm">
-                <div class="form-group">
+                <div class="form-group" style=" text-align:left">
                     <label for="totalAmount">Total Amount</label>
                     <input class="form-control" id="totalAmount" name="totalAmount" type="text"
                         [(ngModel)]="totalAmount">
-                    <small id="emailHelp" class="form-text text-muted">The overall cost.</small>
+                    <small id="emailHelp" class="form-text text-muted">The overall cost</small>
                 </div>
                 <!--<button class="btn btn-outline-primary" type="submit">Refresh</button>-->
             </div>

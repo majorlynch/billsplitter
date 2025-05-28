@@ -54,7 +54,7 @@ export class DinersService {
     'Alex',
     'Sunil',
     'Ursula',
-    'Wend',
+    'Wendy',
     'Tomas',
     'Dennis',
     'Paola',
@@ -132,8 +132,6 @@ export class DinersService {
   }
 
   divideAmount(diners: DinerBase[], divideAmount: number) {
-    console.log(diners);
-    console.log(divideAmount);
     const countUnLockedDiners =
       diners.filter((x) => x.locked === false).length || 1;
     const countTotalLockedDiners = this.getTotal(diners, true);
@@ -147,15 +145,13 @@ export class DinersService {
     //add variance
     const variance =
       Math.round(
-        (divideAmount - (countTotalLockedDiners + (countUnLockedDiners* avgPerDiner))) * 100
+        (divideAmount - (countTotalLockedDiners + (countUnLockedDiners * avgPerDiner))) * 100
       ) / 100;
 
       if (variance !== 0)
       {
         //find first diner that is not locked
         const firstUnlockedDiner = diners.findIndex(x => x.locked !== true);
-        console.log('firstUnlockedDiner =' + firstUnlockedDiner);
-        console.log(firstUnlockedDiner);
         diners[firstUnlockedDiner].amount = Math.round((diners[firstUnlockedDiner].amount + variance) * 100) / 100;
       }
   }

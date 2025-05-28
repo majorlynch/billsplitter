@@ -1,0 +1,7 @@
+<app-header/>
+<div class="container-fluid text-center">
+    <h2>Meal Bill Splitter</h2>
+    <div style="margin:auto"><app-piechart [diners]="diners"/></div>
+    <div class="p-8"><app-dynamic-form [diners]="diners" [totalAmount]="totalAmount" (updatechart)="onUpdateChart()" (removediner)="onRemoveDiner($event)" (insertdiner)="onInsertDiner()" (divideamount)="onDivideAmount($event)" (generateRandomNames)="onGenerateRandomNames()"/></div>
+    <div></div>
+</div>

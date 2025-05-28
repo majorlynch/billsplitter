@@ -33,7 +33,6 @@ export class DynamicFormQuestionComponent implements OnChanges {
   }
 
   get isValid() {
-    console.log(this.diner);
     return this.form.controls[this.diner.key].valid;
   }
 
