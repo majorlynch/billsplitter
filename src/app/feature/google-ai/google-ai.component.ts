@@ -15,14 +15,15 @@ import { finalize, tap } from 'rxjs';
 })
 export class GoogleAiComponent {
   prompt: string = '';
-  aiResponse: string = '';
+  aiGeminiResponse: string = '';
+  aiDeepSeekResponse: string = '';
   showSpinner = false;
 
   constructor(private geminiAiService: GeminiAiService) {}
 
   getResponse() {
-    console.log('1');
-    this.aiResponse = '';
+    this.aiGeminiResponse = '';
+    this.aiDeepSeekResponse = '';
     this.showSpinner = true;
     /*
     this.geminiAiService.getResponse(this.prompt).then((res) => {
@@ -32,13 +33,16 @@ export class GoogleAiComponent {
     });
     */
     //this.geminiAiService.getResponse(this.prompt, true)
-    this.geminiAiService.getResponse(this.prompt)
+    this.geminiAiService.getGeminiResponse(this.prompt, true)
     .pipe(tap(res => console.log(res)),
           finalize(() => this.showSpinner = false))
-    .subscribe(res => this.aiResponse = res
-    )
-    ;
+    .subscribe(res => this.aiGeminiResponse = res
+    );
 
-    console.log('2');
+    this.geminiAiService.getDeepseekResponse(this.prompt)
+    .pipe(tap(res => console.log(res)),
+          finalize(() => this.showSpinner = false))
+    .subscribe(res => this.aiGeminiResponse = res
+    );
   }
 }

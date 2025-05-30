@@ -1,4 +1,5 @@
 export const environment = {
     production: false,
-    apiKeyGemini: process.env["API_KEY"] || 'DEF_A'
+    apiKeyGemini: process.env["API_KEY_GEMINI"],
+    apiKeyDeepSeek: process.env["API_KEY_DEEPSEEK"],
 };

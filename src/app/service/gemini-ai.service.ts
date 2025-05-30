@@ -1,7 +1,8 @@
 import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
-import { GoogleGenAI } from '@google/genai';
 import { from, Observable } from 'rxjs';
+import { GoogleGenAI } from '@google/genai';
+import { OpenAI } from 'openai';
 
 @Injectable({
   providedIn: 'root',
@@ -10,10 +11,19 @@ export class GeminiAiService {
   constructor() {}
   response: any;
 
-  async getResponsePromise(prompt: string): Promise<string> {
-    const ai = new GoogleGenAI({
-      apiKey: environment.apiKeyGemini,
-    });
+  //Gemini
+  ai = new GoogleGenAI({
+    apiKey: environment.apiKeyGemini,
+  });
+
+  //DeepSeek
+  openai = new OpenAI({
+    baseURL: 'https://api.deepseek.com',
+    dangerouslyAllowBrowser: true,
+    apiKey: environment.apiKeyDeepSeek
+  });
+
+  async getGeminiResponsePromise(prompt: string): Promise<string> {
 
     try {
       /*
@@ -23,7 +33,7 @@ export class GeminiAiService {
       }, 1000); // Delay of 1000 milliseconds (1 second)
       */
 
-      this.response = await ai.models.generateContent({
+      this.response = await this.ai.models.generateContent({
         model: 'gemini-2.0-flash',
         contents: prompt,
       });
@@ -34,12 +44,31 @@ export class GeminiAiService {
     //return this.response;
   }
 
-  getResponse(prompt: string, returnSampleText?: boolean): Observable<string> {
+  getGeminiResponse(prompt: string, returnSampleText?: boolean): Observable<string> {
     if (returnSampleText) {
       const sampleText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.';
       return from([sampleText]);
     }
     else
-      return from(this.getResponsePromise(prompt));
+      return from(this.getGeminiResponsePromise(prompt));
   }
+
+  async getDeepSeekResponsePromise(prompt: string): Promise<string> {
+    const completion = await this.openai.chat.completions.create({
+      messages: [{ role: "system", content: prompt }],
+      model: "deepseek-chat"
+    });
+
+    return (completion.choices[0].message.content!);
+  }
+
+  getDeepseekResponse(prompt: string, returnSampleText?: boolean): Observable<string> {
+    if (returnSampleText) {
+      const sampleText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.';
+      return from([sampleText]);
+    }
+    else
+      return from(this.getDeepSeekResponsePromise(prompt));
+  }
+
 }
