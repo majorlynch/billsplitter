@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { GeminiAiService } from './gemini-ai.service';
+import { PromptAiService } from './prompt-ai.service';
 
-describe('GeminiAiService', () => {
-  let service: GeminiAiService;
+describe('PromptAiService', () => {
+  let service: PromptAiService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(GeminiAiService);
+    service = TestBed.inject(PromptAiService);
   });
 
   it('should be created', () => {

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GoogleAiComponent } from './google-ai.component';
+import { PromptAiComponent } from './prompt-ai.component';
 
-describe('GoogleAiComponent', () => {
-  let component: GoogleAiComponent;
-  let fixture: ComponentFixture<GoogleAiComponent>;
+describe('PromptAiComponent', () => {
+  let component: PromptAiComponent;
+  let fixture: ComponentFixture<PromptAiComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GoogleAiComponent]
+      imports: [PromptAiComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(GoogleAiComponent);
+    fixture = TestBed.createComponent(PromptAiComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

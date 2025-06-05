@@ -1,4 +1,4 @@
-import { HeaderComponent } from './header/header.component';
+import { HeaderComponent } from '../core/components/header/header.component';
 import { DynamicFormComponent } from './dynamic-form/dynamic-form.component';
 import { Component, ViewChild } from '@angular/core';
 import { PieChartComponent } from './piechart/piechart.component';

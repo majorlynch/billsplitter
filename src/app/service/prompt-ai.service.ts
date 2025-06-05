@@ -1,4 +1,4 @@
-import { environment } from './../../environments/environment';
+import { environment } from '../../environments/environment';
 import { Injectable } from '@angular/core';
 import { from, Observable } from 'rxjs';
 import { GoogleGenAI } from '@google/genai';
@@ -7,7 +7,7 @@ import { OpenAI } from 'openai';
 @Injectable({
   providedIn: 'root',
 })
-export class GeminiAiService {
+export class PromptAiService {
   constructor() {}
   response: any;
 
@@ -17,6 +17,7 @@ export class GeminiAiService {
   });
 
   //DeepSeek
+
   openai = new OpenAI({
     baseURL: 'https://api.deepseek.com',
     dangerouslyAllowBrowser: true,
@@ -26,13 +27,6 @@ export class GeminiAiService {
   async getGeminiResponsePromise(prompt: string): Promise<string> {
 
     try {
-      /*
-      setTimeout(() => {
-        this.response = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
-
-      }, 1000); // Delay of 1000 milliseconds (1 second)
-      */
-
       this.response = await this.ai.models.generateContent({
         model: 'gemini-2.0-flash',
         contents: prompt,
@@ -41,7 +35,6 @@ export class GeminiAiService {
       console.log(e);
     }
     return this.response.text;
-    //return this.response;
   }
 
   getGeminiResponse(prompt: string, returnSampleText?: boolean): Observable<string> {
@@ -54,6 +47,7 @@ export class GeminiAiService {
   }
 
   async getDeepSeekResponsePromise(prompt: string): Promise<string> {
+    console.log(environment.apiKeyDeepSeek as string);
     const completion = await this.openai.chat.completions.create({
       messages: [{ role: "system", content: prompt }],
       model: "deepseek-chat"

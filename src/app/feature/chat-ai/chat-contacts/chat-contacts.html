@@ -1,0 +1,14 @@
+
+          <div class="col-inside-lg decor-default chat" style="overflow: hidden; outline: none;" tabindex="5000">
+            <div class="chat-users">
+              <h6>Contacts</h6>
+                <div *ngFor="let contact of userContactList" class="user">
+                    <div class="avatar">
+                    <img src="{{contact.userImage}}" alt="User name">
+                    <div class="status {{contact.userStatus}}"></div>
+                    </div>
+                    <div class="name">{{contact.userName}}</div>
+                    <div class="mood">{{contact.userStatus}}</div>
+                </div>
+            </div>
+          </div>
