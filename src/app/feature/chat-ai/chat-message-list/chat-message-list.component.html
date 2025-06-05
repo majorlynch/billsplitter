@@ -1,0 +1,124 @@
+
+          <div class="chat-body">
+            <h6>Chat</h6>
+            <div *ngFor="let message of messageDetail" class="user">
+            <div class="answer" [ngClass]="{'left': message.userType == 'responder', 'right' : message.userType == 'user'}">
+              <div class="avatar">
+                <img
+                  src="{{message.userImage}}"
+                  alt=""
+                />
+                <div class="status {{message.userStatus}}"></div>
+              </div>
+              <div class="name">{{message.userName}}</div>
+              <div class="text">{{message.messageDetail}}</div>
+              <div class="time">{{message.messageTime}}</div>
+            </div>
+            </div>
+            <div class="answer left">
+              <div class="avatar">
+                <img
+                  src="assets/images/avatar1.png"
+                  alt="User name"
+                />
+                <div class="status online"></div>
+              </div>
+              <div class="name">Alexander Herthic</div>
+              <div class="text">...</div>
+              <div class="time">5 min ago</div>
+            </div>
+            <div class="answer right">
+              <div class="avatar">
+                <img
+                  src="assets/images/avatar2.png"
+                  alt="User name"
+                />
+                <div class="status busy"></div>
+              </div>
+              <div class="name">Alexander Herthic</div>
+              <div class="text">
+                It is a long established fact that a reader will be. Thanks
+                Mate!
+              </div>
+              <div class="time">5 min ago</div>
+            </div>
+            <div class="answer right">
+              <div class="avatar">
+                <img
+                  src="assets/images/avatar1.png"
+                  alt="User name"
+                />
+                <div class="status off"></div>
+              </div>
+              <div class="name">Alexander Herthic</div>
+              <div class="text">
+                It is a long established fact that a reader will be. Thanks
+                Mate!
+              </div>
+              <div class="time">5 min ago</div>
+            </div>
+            <div class="answer left">
+              <div class="avatar">
+                <img
+                  src="assets/images/avatar2.png"
+                  alt="User name"
+                />
+                <div class="status offline"></div>
+              </div>
+              <div class="name">Alexander Herthic</div>
+              <div class="text">
+                Lorem ipsum dolor amet, consectetur adipisicing elit Lorem ipsum
+                dolor amet, consectetur adipisicing elit Lorem ipsum dolor amet,
+                consectetur adiping elit
+              </div>
+              <div class="time">5 min ago</div>
+            </div>
+            <div class="answer right">
+              <div class="avatar">
+                <img
+                  src="assets/images/avatar1.png"
+                  alt="User name"
+                />
+                <div class="status offline"></div>
+              </div>
+              <div class="name">Alexander Herthic</div>
+              <div class="text">
+                Lorem ipsum dolor amet, consectetur adipisicing elit Lorem ipsum
+                dolor amet, consectetur adipisicing elit Lorem ipsum dolor amet,
+                consectetur adiping elit
+              </div>
+              <div class="time">5 min ago</div>
+            </div>
+            <div class="answer left">
+              <div class="avatar">
+                <img
+                  src="assets/images/avatar2.png"
+                  alt="User name"
+                />
+                <div class="status online"></div>
+              </div>
+              <div class="name">Alexander Herthic</div>
+              <div class="text">...</div>
+              <div class="time">5 min ago</div>
+            </div>
+            <div class="answer right">
+              <div class="avatar">
+                <img
+                  src="assets/images/avatar2.png"
+                  alt="User name"
+                />
+                <div class="status off"></div>
+              </div>
+              <div class="name">Alexander Herthic</div>
+              <div class="text">
+                It is a long established fact that a reader will be. Thanks
+                Mate!sssssssssssss
+              </div>
+              <div class="time">5 min ago</div>
+            </div>
+            <div class="answer-add">
+              <input placeholder="Write a message" />
+              <span class="answer-btn answer-btn-1"></span>
+              <span class="answer-btn answer-btn-2"></span>
+            </div>
+          </div>

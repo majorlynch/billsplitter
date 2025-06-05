@@ -17,6 +17,10 @@ export class ChatAiContacts implements OnInit {
     constructor (private chatAiService: ChatAiService) {}
 
     ngOnInit () {
+        this.getContactData();
+    }
+
+    getContactData() {
         this.chatAiService.getContactData().subscribe(res => this.userContactList = res);
     }
 

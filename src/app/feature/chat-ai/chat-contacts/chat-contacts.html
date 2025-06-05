@@ -2,7 +2,7 @@
           <div class="col-inside-lg decor-default chat" style="overflow: hidden; outline: none;" tabindex="5000">
             <div class="chat-users">
               <h6>Contacts</h6>
-                <div *ngFor="let contact of userContactList" class="user">
+                <div *ngFor="let contact of userContactList" class="user"  aria-live="polite">
                     <div class="avatar">
                     <img src="{{contact.userImage}}" alt="User name">
                     <div class="status {{contact.userStatus}}"></div>
