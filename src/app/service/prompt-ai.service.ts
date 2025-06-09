@@ -16,7 +16,7 @@ export class PromptAiService {
     apiKey: environment.apiKeyGemini,
   });
 
-  //DeepSeek
+  //Deepseek
 
   openai = new OpenAI({
     baseURL: 'https://api.deepseek.com',

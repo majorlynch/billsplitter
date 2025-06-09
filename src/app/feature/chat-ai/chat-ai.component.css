@@ -116,7 +116,9 @@ dy{
   overflow: auto; /* Enable scrolling when content overflows */
   border: 1px solid black; /* Optional styling */
   padding: 10px;
-
+  background-color: #E9F1FA;
+  border-width: 2px;
+  border-color: #ECEFF5;
 }
 .chat-body .answer .name {
     font-size: 14px;
@@ -129,7 +131,7 @@ dy{
     bottom: 0;
 }
 .chat-body .answer.left .text {
-    background: #ebebeb;
+    background: #FDFFFF;
     color: #333333;
     border-radius: 8px 8px 8px 0;
 }
@@ -140,8 +142,8 @@ dy{
     position: relative;
 }
 .chat-body .answer.left .text:before {
-    left: -30px;
-    border-right-color: #ebebeb;
+    left: -29px;
+    border-right-color: #FDFFFF;
     border-right-width: 12px;
 }
 .chat-body .answer .text:before {
@@ -181,7 +183,7 @@ dy{
     border-radius: 8px 8px 0 8px;
 }
 .chat-body .answer.right .text:before {
-    right: -30px;
+    right: -29px;
     border-left-color: #7266ba;
     border-left-width: 12px;
 }

@@ -2,13 +2,15 @@
           <div class="col-inside-lg decor-default chat" style="overflow: hidden; outline: none;" tabindex="5000">
             <div class="chat-users">
               <h6>Contacts</h6>
-                <div *ngFor="let contact of userContactList" class="user"  aria-live="polite">
+                <div *ngFor="let ai of aiList" class="user rounded" aria-live="polite"
+                     [ngStyle]="ai.aiName == selectedAI ? {'background-color': '#ECEFF5'} : null"
+                     (click)="setSelectedContact(ai.aiName)">
                     <div class="avatar">
-                    <img src="{{contact.userImage}}" alt="User name">
-                    <div class="status {{contact.userStatus}}"></div>
+                    <img src="{{ai.aiImage}}" alt="User name">
+                    <div class="status {{ai.aiOnlineStatus}}"></div>
                     </div>
-                    <div class="name">{{contact.userName}}</div>
-                    <div class="mood">{{contact.userStatus}}</div>
+                    <div class="name">{{ai.aiName}}</div>
+                    <div class="mood">{{ai.aiOnlineStatus}}</div>
                 </div>
             </div>
           </div>

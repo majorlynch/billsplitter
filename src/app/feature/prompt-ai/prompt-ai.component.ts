@@ -3,7 +3,7 @@ import { PromptAiService } from '../../service/prompt-ai.service';
 import { Component } from '@angular/core';
 import { HeaderComponent } from '../../core/components/header/header.component';
 import { FormsModule } from '@angular/forms';
-import { debounceTime, finalize, tap } from 'rxjs';
+import { finalize, tap } from 'rxjs';
 
 @Component({
   selector: 'app-google-ai',
@@ -33,13 +33,13 @@ export class PromptAiComponent {
     });
     */
     //this.PromptAiService.getResponse(this.prompt, true)
-    this.PromptAiService.getGeminiResponse(this.prompt, true)
+    this.PromptAiService.getGeminiResponse(this.prompt)
     .pipe(tap(res => console.log(res)),
           finalize(() => this.showInProgress = false))
     .subscribe(res => this.aiGeminiResponse = res
     );
 
-    this.PromptAiService.getDeepseekResponse(this.prompt, true)
+    this.PromptAiService.getDeepseekResponse(this.prompt)
     .pipe(tap(res => console.log(res)),
           finalize(() => this.showInProgress = false))
     .subscribe(res => this.aiDeepSeekResponse = res

@@ -8,3 +8,23 @@ export interface MessageDetail {
     messageTime: Date,
     messageTimeText?: string
 }
+
+export interface ChatContent {
+    aiName: string,
+    messageDetail: MessageDetail[]
+}
+
+export interface TextPrompt {
+    text: string
+}
+
+export interface aiDetail {
+    aiName: string,
+    aiImage: string,
+    aiOnlineStatus: string,
+}
+
+export interface ChatHistory {
+    role: string,
+    content: string
+}

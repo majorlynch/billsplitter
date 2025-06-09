@@ -1,12 +1,18 @@
-import { AfterViewChecked, Component, ElementRef, ViewChild } from '@angular/core';
-import { HeaderComponent } from '../../core/components/header/header.component';
+import {
+  AfterViewChecked,
+  Component,
+  ElementRef,
+  ViewChild,
+} from '@angular/core';
 import { ViewEncapsulation } from '@angular/core';
-import { ChatAiContacts } from "./chat-contacts/chat-contacts";
+import { ChatAiContacts } from './chat-contacts/chat-contacts';
 import { HttpClient, HttpHandler } from '@angular/common/http';
-import { ChatAiService } from './services/chat-services';
-import { MessageDetail } from '../../shared/model/messageBase';
+import { ChatAiService } from '../../service/chat-services';
+import { ChatContent, ChatHistory, MessageDetail } from '../../shared/model/messageBase';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { debounceTime, finalize, tap } from 'rxjs';
+import { aiDetail } from '../../shared/model/messageBase';
 
 @Component({
   selector: 'app-chat-ai',
@@ -15,58 +21,126 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './chat-ai.component.html',
   styleUrl: './chat-ai.component.css',
   encapsulation: ViewEncapsulation.Emulated,
-  providers: [HttpClient]
+  providers: [HttpClient],
 })
-export class ChatAiComponent implements AfterViewChecked{
-
-  inputMessage : string = '';
-
-  constructor (private chatAiService: ChatAiService) {}
+export class ChatAiComponent implements AfterViewChecked {
+  chatPrompt: string = '';
+  showInProgress = false;
+  aiList : aiDetail[] = [];
+  selectedAI: aiDetail | undefined;
+  displayMessages: MessageDetail[] = [];
+  chatContent: ChatContent[] = [];
+  isChatLoading: boolean = false;
   
-    ngOnInit() {
-      this.getMessageData();
-    }
+  constructor(private chatAiService: ChatAiService) {
+  }
 
-    ngAfterViewChecked(): void {
-            let div = document.getElementById("chatBody");
-      div!.scrollTop = div!.scrollHeight-100;
-    }
-  
-    messageDetail: MessageDetail[] = [];
-  
-    getMessageData() {
-      this.chatAiService.getMessages().subscribe((res) => this.messageDetail = res);
-    }
+  ngOnInit() {
+    this.chatAiService.getContactData().subscribe(res => this.aiList = res);
+    this.selectedAI = this.aiList.find((r) => r.aiName == 'Gemini');
+    this.chatContent = [{
+    aiName: 'Gemini',
+    messageDetail: []
+  },
+  {
+    aiName: 'Deepseek',
+    messageDetail: []
+  }
+];
+  }
 
-    sendMessage() {
-      console.log(this.inputMessage);
-      const newMessage =
-            [
-                    {
-        userId: 2,
-        userName: 'Conor',
-        userImage: 'assets/images/avatar1.png',
-        userStatus: 'online',
-        userType: 'user',
-        messageDetail: this.inputMessage,
-        messageTime: new Date(),
-        messageTimeText: new Date().toLocaleString('en-GB')
-      },
+  ngAfterViewChecked(): void {
+    let div = document.getElementById('chatBody');
+    div!.scrollTop = div!.scrollHeight - 100;
+  }
+
+
+  sendMessage() {
+    let chatResponse: string = '';
+    this.isChatLoading = true;
+    console.log(this.isChatLoading);
+    const newUserMessage: MessageDetail[] = [
+              {
+                userId: 1,
+                userName: 'Conor',
+                userImage: 'assets/images/avatar1.png',
+                userStatus: 'online',
+                userType: 'user',
+                messageDetail: this.chatPrompt,
+                messageTime: new Date(),
+                messageTimeText: new Date().toLocaleString('en-GB'),
+              }];
+    this.displayMessages = [...this.displayMessages, ...newUserMessage];
+
+    if(this.selectedAI?.aiName == 'Gemini')
+    {
+      const userHistory = this.displayMessages.filter(r => r.userType == 'user').map(r => ({'text' : r.messageDetail}));
+      const aiHistory = this.displayMessages.filter(r => r.userType == 'assistant').map(r => ({'text' : r.messageDetail}));
+
+      this.chatAiService
+        .getGeminiChat(this.chatPrompt, userHistory, aiHistory, true)
+        .pipe(
+          finalize(() => {
+            const newResponseMessage: MessageDetail[] = [
+              {
+                userId: 2,
+                userName: this.selectedAI!.aiName,
+                userImage: this.selectedAI!.aiImage,
+                userStatus: 'online',
+                userType: 'assistant',
+                messageDetail: `${chatResponse}`,
+                messageTime: new Date(),
+                messageTimeText: new Date().toLocaleString('en-GB'),
+              },
+            ];
+            this.displayMessages = [...this.displayMessages, ...newResponseMessage];
+            this.chatContent.filter((r) => r.aiName == this.selectedAI!.aiName)[0].messageDetail = this.displayMessages;
+            this.isChatLoading = false;
+          })
+        )
+        .subscribe((res) => (chatResponse = res));
+      }
+
+      else if(this.selectedAI?.aiName == 'Deepseek')
       {
-        userId: 2,
-        userName: 'Gemini',
-        userImage: 'assets/images/avatar_robot.png',
-        userStatus: 'online',
-        userType: 'responder',
-        messageDetail: `Standard reply to '${this.inputMessage}'`,
-        messageTime: new Date(),
-        messageTimeText: new Date().toLocaleString('en-GB')
-      }];
+        const chatHistory: ChatHistory[] = this.displayMessages.map(
+          ({ userType, messageDetail }) => ({
+            role: userType,
+            content: messageDetail,
+          })
+        );
+        console.log();
 
-      this.messageDetail = [...this.messageDetail, ...newMessage];
-      console.log(this.messageDetail);
+        this.chatAiService
+        .getDeepseekResponse(this.chatPrompt, chatHistory)
+        .pipe(
+          tap((res) => console.log(res)),
+          finalize(() => {
+            const newResponseMessage: MessageDetail[] = [
+              {
+                userId: 2,
+                userName: this.selectedAI!.aiName,
+                userImage: this.selectedAI!.aiImage,
+                userStatus: 'online',
+                userType: 'assistant',
+                messageDetail: `${chatResponse}`,
+                messageTime: new Date(),
+                messageTimeText: new Date().toLocaleString('en-GB'),
+              },
+            ];
+            this.displayMessages = [...this.displayMessages, ... newResponseMessage];
+            this.chatContent.filter((r) => r.aiName == this.selectedAI!.aiName)[0].messageDetail = this.displayMessages;
+            this.isChatLoading = false;
+          })
+        )
+        .subscribe((res) => (chatResponse = res));
+      }
+  }
 
-
-    }
-
+  setSelectedAi(newSelectedAI : string) {
+    if(this.selectedAI!.aiName != newSelectedAI)
+        this.displayMessages = this.chatContent.filter(a => a.aiName == newSelectedAI).flatMap(r => r.messageDetail);
+    this.selectedAI = this.aiList.filter(r => r.aiName == newSelectedAI)[0];
+    this.chatPrompt = '';
+  }
 }
