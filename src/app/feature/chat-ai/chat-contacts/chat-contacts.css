@@ -1,22 +1,12 @@
-dy{
-    margin-top:20px;
-    background:#eee;
-}
+
 .row.row-broken {
     padding-bottom: 0;
 }
 .col-inside-lg {
-    padding: 20px;
-}
-.chat {
-    height: calc(100vh - 180px);
-}
-.decor-default {
-    background-color: #ffffff;
+    
 }
 .chat-users h6 {
     font-size: 20px;
-    margin: 0 0 20px;
 }
 .chat-users .user {
     position: relative;

@@ -97,7 +97,7 @@ export class ChatAiComponent implements AfterViewChecked {
             this.isChatLoading = false;
           })
         )
-        .subscribe((res) => (chatResponse = res));
+        .subscribe((res) => (chatResponse = this.chatAiService.formatGeminiContent(res), console.log(res)));
       }
 
       else if(this.selectedAI?.aiName == 'Deepseek')
@@ -125,12 +125,12 @@ export class ChatAiComponent implements AfterViewChecked {
                 messageTimeText: new Date().toLocaleString('en-GB'),
               },
             ];
-            this.displayMessages = [...this.displayMessages, ... newResponseMessage];
+            this.displayMessages = [...this.displayMessages, ...newResponseMessage];
             this.chatContent.filter((r) => r.aiName == this.selectedAI!.aiName)[0].messageDetail = this.displayMessages;
             this.isChatLoading = false;
           })
         )
-        .subscribe((res) => (chatResponse = res));
+        .subscribe((res) => (chatResponse = this.chatAiService.formatGeminiContent(res)));
       }
   }
 
