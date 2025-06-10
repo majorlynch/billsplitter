@@ -4,7 +4,6 @@ import { of, from, Observable } from 'rxjs';
 import { GoogleGenAI } from '@google/genai';
 import { aiDetail, ChatHistory, MessageDetail, TextPrompt } from '../shared/model/messageBase';
 import { OpenAI } from 'openai';
-import { FireBaseService } from './firebase-service';
 
 @Injectable({
   providedIn: 'root',
@@ -22,11 +21,6 @@ export class ChatAiService {
     dangerouslyAllowBrowser: true,
     apiKey: environment.apiKeyDeepSeek
   });
-
-  constructor(private firebaseService: FireBaseService) {
-    this.docs = this.firebaseService.getAll();
-    console.log(this.docs.query);
-  }
 
   async getGeminiChatPromise(chatPrompt: string, userHistory: TextPrompt[], aiHistory: TextPrompt[]): Promise<string> {
     const chat = this.ai.chats.create({
@@ -51,8 +45,6 @@ export class ChatAiService {
 
   getGeminiChat(chatPrompt: string, userHistory: TextPrompt[], aiHistory: TextPrompt[], returnSampleText?: boolean
   ): Observable<string> {
-    
-
     if (returnSampleText) {
       setTimeout(() => {
       console.log("Waited 3 seconds!");
@@ -79,7 +71,6 @@ export class ChatAiService {
 
     async getDeepSeekResponsePromise(chatPrompt: string, chatHistory: ChatHistory[]): Promise<string> {
       chatHistory.push({role: 'user', content: chatPrompt});
-      console.log(chatHistory);
     const completion = await this.openai.chat.completions.create({
       model: "deepseek-chat",
       messages: chatHistory as any,

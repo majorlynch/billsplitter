@@ -17,31 +17,24 @@ export class PromptAiComponent {
   prompt: string = '';
   aiGeminiResponse: string = '';
   aiDeepSeekResponse: string = '';
-  showInProgress = false;
+  isLoadingGemini = false;
+  isLoadingDeepseek = false;
 
   constructor(private PromptAiService: PromptAiService) {}
 
   getResponse() {
     this.aiGeminiResponse = '';
     this.aiDeepSeekResponse = '';
-    this.showInProgress = true;
-    /*
-    this.PromptAiService.getResponse(this.prompt).then((res) => {
-      this.aiResponse = res;
-      console.log(this.aiResponse);
-      this.showInProgress = false;
-    });
-    */
-    //this.PromptAiService.getResponse(this.prompt, true)
+    this.isLoadingGemini = true;
+    this.isLoadingDeepseek = true;
     this.PromptAiService.getGeminiResponse(this.prompt)
-    .pipe(tap(res => console.log(res)),
-          finalize(() => this.showInProgress = false))
+    .pipe(finalize(() => this.isLoadingGemini = false))
     .subscribe(res => this.aiGeminiResponse = res
     );
 
     this.PromptAiService.getDeepseekResponse(this.prompt)
     .pipe(tap(res => console.log(res)),
-          finalize(() => this.showInProgress = false))
+          finalize(() => this.isLoadingDeepseek = false))
     .subscribe(res => this.aiDeepSeekResponse = res
     );
   }

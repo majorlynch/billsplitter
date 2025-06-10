@@ -14,7 +14,7 @@
             />
           </div>
           <div>
-            <button (click)="getResponse()" class="btn btn-primary bg-gradient" [disabled]="showInProgress">
+            <button (click)="getResponse()" class="btn btn-primary bg-gradient" [disabled]="isLoadingDeepseek || isLoadingDeepseek">
               Submit
             </button>
           </div>
@@ -28,11 +28,11 @@
         <div class="card">
           <h5 class="card-header">Gemini AI Response</h5>
           <div class="card-body text-start">
-            <div *ngIf="!showInProgress" style="white-space: pre-wrap">
+            <div *ngIf="!isLoadingGemini" style="white-space: pre-wrap">
               <label class="form-label">Response</label>
               <p class="card-text">{{ aiGeminiResponse }}</p>
             </div>
-            <div *ngIf="showInProgress" class="spinner-border block" role="status">
+            <div *ngIf="isLoadingGemini" class="spinner-border block" role="status">
               <span class="sr-only"></span>
             </div>
           </div>
@@ -42,11 +42,11 @@
         <div class="card">
           <h5 class="card-header">DeepSeek AI Response</h5>
           <div class="card-body text-start">
-            <div *ngIf="!showInProgress" style="white-space: pre-wrap">
+            <div *ngIf="!isLoadingDeepseek" style="white-space: pre-wrap">
               <label class="form-label">Response</label>
               <p class="card-text">{{ aiDeepSeekResponse }}</p>
             </div>
-            <div *ngIf="showInProgress" class="spinner-border block" role="status">
+            <div *ngIf="isLoadingDeepseek" class="spinner-border block" role="status">
               <span class="sr-only"></span>
             </div>
           </div>

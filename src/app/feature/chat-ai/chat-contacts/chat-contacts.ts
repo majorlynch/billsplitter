@@ -25,7 +25,6 @@ export class ChatAiContacts implements OnInit {
 
     getContactData() {
         this.chatAiService.getContactData().subscribe(res => this.aiList = res);
-        console.log(this.aiList);
     }
 
     setSelectedContact(aiName: string) {

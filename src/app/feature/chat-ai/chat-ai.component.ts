@@ -58,7 +58,6 @@ export class ChatAiComponent implements AfterViewChecked {
   sendMessage() {
     let chatResponse: string = '';
     this.isChatLoading = true;
-    console.log(this.isChatLoading);
     const newUserMessage: MessageDetail[] = [
               {
                 userId: 1,
@@ -78,7 +77,7 @@ export class ChatAiComponent implements AfterViewChecked {
       const aiHistory = this.displayMessages.filter(r => r.userType == 'assistant').map(r => ({'text' : r.messageDetail}));
 
       this.chatAiService
-        .getGeminiChat(this.chatPrompt, userHistory, aiHistory, true)
+        .getGeminiChat(this.chatPrompt, userHistory, aiHistory)
         .pipe(
           finalize(() => {
             const newResponseMessage: MessageDetail[] = [
@@ -109,12 +108,10 @@ export class ChatAiComponent implements AfterViewChecked {
             content: messageDetail,
           })
         );
-        console.log();
 
         this.chatAiService
         .getDeepseekResponse(this.chatPrompt, chatHistory)
         .pipe(
-          tap((res) => console.log(res)),
           finalize(() => {
             const newResponseMessage: MessageDetail[] = [
               {

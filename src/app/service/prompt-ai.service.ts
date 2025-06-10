@@ -17,7 +17,6 @@ export class PromptAiService {
   });
 
   //Deepseek
-
   openai = new OpenAI({
     baseURL: 'https://api.deepseek.com',
     dangerouslyAllowBrowser: true,
@@ -47,7 +46,6 @@ export class PromptAiService {
   }
 
   async getDeepSeekResponsePromise(prompt: string): Promise<string> {
-    console.log(environment.apiKeyDeepSeek as string);
     const completion = await this.openai.chat.completions.create({
       messages: [{ role: "system", content: prompt }],
       model: "deepseek-chat"
