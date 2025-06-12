@@ -1,0 +1,14 @@
+@font-face {
+  font-family: 'Aurebesh';
+  src: url('assets/fonts/Aurebesh.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.aurebesh-text {
+  font-family: 'Aurebesh', sans-serif;
+}
+
+.aurebesh-button-width {
+    width: 40px;
+}

@@ -1,0 +1,23 @@
+
+
+    <div class="container center-container pt-5">
+        <input [(ngModel)]="translation" type="text" class="form-control fs-4" placeholder="Text to be translated to Aurebesh">
+        <p class="aurebesh-text fs-3  pt-5">{{translation}}</p>
+    </div>
+
+    <div class="container pt-5">
+    <input type="text" [(ngModel)]="inputText" class="form-control mb-3" readonly>
+
+    <div class="keyboard">
+        <button *ngFor="let letter of alphabet" (click)="addLetter(letter)" class="btn btn-outline-secondary m-1 aurebesh-text aurebesh-button-width">
+            {{ letter }}
+        </button>
+    </div>
+    <div class="keyboard">
+        <button *ngFor="let letter of alphabet" (click)="addLetter(letter)" class="btn btn-outline-secondary m-1 aurebesh-button-width">
+            {{ letter }}
+        </button>
+    </div>
+
+    <button (click)="clearText()" class="btn btn-outline-secondary mt-3">Clear</button>
+</div>

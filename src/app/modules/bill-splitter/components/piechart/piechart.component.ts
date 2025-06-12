@@ -1,6 +1,6 @@
 import { Component, Input, ViewChild, ElementRef } from '@angular/core';
 import { ChartConfiguration, Chart } from 'chart.js/auto';
-import { DinerBase } from '../../shared/model/dinerBase';
+import { DinerBase } from '@models/dinerBase';
 
 @Component({
   selector: 'app-piechart',

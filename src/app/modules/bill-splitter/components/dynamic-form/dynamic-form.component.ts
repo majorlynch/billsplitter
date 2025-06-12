@@ -2,8 +2,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DynamicFormDinerComponent } from './dynamic-form-diner/dynamic-form-diner.component';
-import { DinerBase } from '../../shared/model/dinerBase';
-import { DinersService } from '../../service/diners.service';
+import { DinerBase } from '@models/dinerBase';
+import { DinersService } from '../../services/diners.service';
 
 @Component({
   selector: 'app-dynamic-form',

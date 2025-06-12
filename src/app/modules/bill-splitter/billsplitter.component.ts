@@ -1,17 +1,16 @@
-import { HeaderComponent } from '../core/components/header/header.component';
-import { DynamicFormComponent } from './dynamic-form/dynamic-form.component';
 import { Component, ViewChild } from '@angular/core';
-import { PieChartComponent } from './piechart/piechart.component';
-import { DinerBase } from './../shared/model/dinerBase';
-import { DinersService } from './../service/diners.service';
+import { DynamicFormComponent } from './components/dynamic-form/dynamic-form.component';
+import { PieChartComponent } from './components/piechart/piechart.component';
+import { DinerBase } from '@models/dinerBase';
+import { DinersService } from './services/diners.service';
 
 @Component({
   selector: 'app-main',
   standalone: true,
-  imports: [HeaderComponent, PieChartComponent, DynamicFormComponent],
-  templateUrl: './main.component.html',
+  imports: [PieChartComponent, DynamicFormComponent],
+  templateUrl: './billsplitter.component.html',
 })
-export class MainComponent {
+export class BillSplitterComponent {
   @ViewChild(PieChartComponent) pieChartComponentChild!: PieChartComponent;
   diners: DinerBase[] = [];
   totalAmount: number = 0;

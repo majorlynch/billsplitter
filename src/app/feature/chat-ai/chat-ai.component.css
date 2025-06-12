@@ -107,7 +107,7 @@ dy{
 .chat-body
 {
   width: 100%; /* Set width */
-  height: 500px; /* Set height */
+  height: 700px; /* Set height */
   overflow: auto; /* Enable scrolling when content overflows */
   border: 1px solid black; /* Optional styling */
   background-color: #E9F1FA;
